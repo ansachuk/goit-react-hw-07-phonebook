@@ -1,13 +1,23 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import ContactForm from "../ContactForm/ContactForm";
 import Filter from "../Filter/Filter";
 import ContactList from "../ContactList/ContactList";
 
 import css from "./App.module.css";
+import { useEffect } from "react";
+import { fetchContacts } from "redux/operations";
+import { getError, getIsLoading } from "redux/selectors";
 
 export function App() {
-	const contacts = useSelector(({ contacts }) => contacts);
+	const disp = useDispatch();
+
+	const isLoading = useSelector(getIsLoading);
+	const error = useSelector(getError);
+
+	useEffect(() => {
+		disp(fetchContacts());
+	}, [disp]);
 
 	return (
 		<>
@@ -16,8 +26,9 @@ export function App() {
 			<ContactForm />
 			<h2 className={css.subtitle}>Contacts</h2>
 
+			{isLoading && !error && <b>Request in progress...</b>}
 			<Filter />
-			{contacts.length ? <ContactList /> : <p className={css.message}>You have no contacts yet!</p>}
+			<ContactList />
 		</>
 	);
 }

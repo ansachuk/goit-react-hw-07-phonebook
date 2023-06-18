@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Notify } from "notiflix";
 
-import { addContact } from "redux/contactsSlice";
+import { addContact } from "redux/operations";
 
 import css from "./ContactForm.module.css";
 
 export default function ContactForm() {
 	const [name, setName] = useState("");
 	const [number, setNumber] = useState("");
-	const contacts = useSelector(({ contacts }) => contacts);
+	const contacts = useSelector(({ contacts }) => contacts.items);
 	const dispatch = useDispatch();
 
 	const resetState = () => {
@@ -37,8 +37,6 @@ export default function ContactForm() {
 
 	const onFormSubmit = e => {
 		e.preventDefault();
-
-		console.log("contacts", contacts);
 
 		const hasSameContactName = contacts.some(contact => contact.name === name);
 

@@ -1,17 +1,20 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 
-const initialState = [
-	{ name: "an", number: "380123123123", id: 1 },
-	{ name: "na", number: "380123123123", id: 2 },
-];
+import { fetchContacts } from "./operations";
+
+const initialState = {
+	items: [],
+	isLoading: false,
+	error: null,
+};
 
 const contactsSlice = createSlice({
 	name: "contacts",
 	initialState,
 	reducers: {
 		addContact: {
-			reducer(contacts, { payload }) {
-				return [...contacts, payload];
+			reducer(state, { payload }) {
+				return { ...state, items: [...state.items, payload] };
 			},
 			prepare({ name, number }) {
 				return {
@@ -24,10 +27,30 @@ const contactsSlice = createSlice({
 			},
 		},
 
-		removeContact: (contacts, { payload }) => contacts.filter(contact => contact.id !== payload),
+		removeContact: (state, { payload }) => {
+			const filteredContacts = state.items.filter(contact => contact.id !== payload);
+
+			return { ...state, items: filteredContacts };
+		},
+	},
+	extraReducers: {
+		[fetchContacts.pending]: ({ isLoading }) => {
+			isLoading = true;
+		},
+
+		[fetchContacts.fulfilled]: ({ isLoading, error, items }, { payload }) => {
+			isLoading = false;
+			error = null;
+			items = payload;
+		},
+
+		[fetchContacts.rejected]: ({ isLoading, error }, { payload }) => {
+			isLoading = false;
+			error = payload;
+		},
 	},
 });
 
-export const { addContact, removeContact, setFromLS } = contactsSlice.actions;
+export const { addContact, removeContact } = contactsSlice.actions;
 
 export default contactsSlice.reducer;
