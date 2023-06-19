@@ -9,13 +9,13 @@ import css from "./ContactForm.module.css";
 
 export default function ContactForm() {
 	const [name, setName] = useState("");
-	const [number, setNumber] = useState("");
+	const [phone, setPhone] = useState("");
 	const contacts = useSelector(({ contacts }) => contacts.items);
 	const dispatch = useDispatch();
 
 	const resetState = () => {
 		setName("");
-		setNumber("");
+		setPhone("");
 	};
 
 	const onInputChange = e => {
@@ -26,8 +26,8 @@ export default function ContactForm() {
 				setName(value);
 				break;
 
-			case "number":
-				setNumber(value);
+			case "phone":
+				setPhone(value);
 				break;
 
 			default:
@@ -47,7 +47,7 @@ export default function ContactForm() {
 		dispatch(
 			addContact({
 				name,
-				number,
+				phone,
 			}),
 		);
 
@@ -74,11 +74,11 @@ export default function ContactForm() {
 			<label className={css.label}>
 				Telephone
 				<input
-					value={number}
+					value={phone}
 					onChange={onInputChange}
 					className={css.number}
 					type="tel"
-					name="number"
+					name="phone"
 					pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
 					title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
 					autoComplete="off"
