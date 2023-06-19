@@ -53,6 +53,7 @@ export default function ContactForm() {
 
 		Notify.success("Contact has added!");
 		resetState();
+		e.currentTarget.blur();
 	};
 
 	return (
