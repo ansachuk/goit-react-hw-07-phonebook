@@ -1,7 +1,7 @@
 {
 	"name": "react-homework-template",
 	"version": "0.1.0",
-	"private": true,
+	"private": false,
 	"homepage": "https://ansachuk.github.io/goit-react-hw-07-phonebook/",
 	"dependencies": {
 		"@reduxjs/toolkit": "^1.9.5",
