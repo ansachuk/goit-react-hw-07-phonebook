@@ -1,4 +1,4 @@
-@import-normalize; /* bring in normalize.css styles */
+@import-normalize;
 
 body {
 	margin: 0;
@@ -9,7 +9,6 @@ body {
 	background-color: rgb(0, 0, 153);
 
 	color: bisque;
-	z-index: -1;
 }
 
 ul,

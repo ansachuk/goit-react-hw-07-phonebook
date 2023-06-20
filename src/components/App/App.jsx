@@ -1,14 +1,16 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+import { fetchContacts } from "redux/operations";
+import { getError, getIsLoading, getContacts } from "redux/selectors";
+
+import { Jelly } from "@uiball/loaders";
 
 import ContactForm from "../ContactForm/ContactForm";
 import Filter from "../Filter/Filter";
 import ContactList from "../ContactList/ContactList";
-import { Jelly } from "@uiball/loaders";
 
-import css from "./App.module.css";
-import { useEffect } from "react";
-import { fetchContacts } from "redux/operations";
-import { getError, getIsLoading, getContacts } from "redux/selectors";
+import css from "./App.module.scss";
 
 export function App() {
 	const disp = useDispatch();
@@ -30,7 +32,7 @@ export function App() {
 				<>
 					{isLoading === true ? (
 						<div className={css.backdrop} aria-live="polite" aria-busy={isLoading}>
-							<Jelly color="rgb(24, 166, 166)" size={200} speed={0.8} />
+							<Jelly color="rgb(24, 166, 166)" size={200} speed={0.6} />
 						</div>
 					) : (
 						contacts.length > 0 && (

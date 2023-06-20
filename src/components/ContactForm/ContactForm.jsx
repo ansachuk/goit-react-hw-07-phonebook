@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Notify } from "notiflix";
-
 import { addContact } from "redux/operations";
 
-import css from "./ContactForm.module.css";
+import { Notify } from "notiflix";
+
+import css from "./ContactForm.module.scss";
 
 export default function ContactForm() {
 	const [name, setName] = useState("");

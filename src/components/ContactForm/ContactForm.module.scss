@@ -13,10 +13,10 @@
 	text-align: center;
 
 	user-select: none;
-}
 
-.label:last-of-type {
-	margin-bottom: 20px;
+	&:last-of-type {
+		margin-bottom: 20px;
+	}
 }
 
 .name,
@@ -51,8 +51,8 @@
 	cursor: pointer;
 
 	transition: background-color 250ms ease;
-}
 
-.submitButton:hover {
-	background-color: rgb(1, 100, 100);
+	&:hover {
+		background-color: rgb(1, 100, 100);
+	}
 }
